@@ -6,7 +6,7 @@ public class StudentAndCourseTest extends TestCase {
 
 	String s1 = "either your getName() method isn't doing its job or you're not " +
 			"setting your instance variables properly";
-	String s2 = "either your getGPA() method is not doing its job or you're not " +
+	String s2 = "either your getGpa() method is not doing its job or you're not " +
 			"setting your instance variables properly";
 	String s4 = "either your getCredits() method is not doing its job or you're not " +
 			"setting your instance variables properly";
@@ -58,7 +58,6 @@ public class StudentAndCourseTest extends TestCase {
 			s.submitGrade(1.0, 1);
 			assertEquals(s9, "Senior", s.getClassStanding());
 		}
-
 	}
 
 	@Test
@@ -79,14 +78,20 @@ public class StudentAndCourseTest extends TestCase {
 
 	@Test
 	public void testComputeTuition() {
+		Object o = new Object();
 		Student s = new Student("D", "S", 1);
+		// This step creates a student and sets the total credits to 15
 		for (int i = 0; i < 14; i++) {
 			s.submitGrade(0, 1);
-			assertEquals("Compute tution not working properly", (i+1) * 1333.33, s.computeTuition());
+			assertEquals("Compute tution not working properly. ", (i+1) * 1333.33, s.computeTuition());
 		}
 
+		System.out.println("Student:" + s.getName() + " Total Credits=" + s.getCredits());
+
 		s.submitGrade(0, 1);
-		assertEquals("Compute tution not working properly", 20000.0, s.computeTuition());
+		double tuition = s.computeTuition();
+		assertEquals("Compute tution not working properly. Did not initialize student to 15 credits hours."
+				, 20000.0, tuition);
 
 		for (int i = 0; i < 14; i++) {
 			s.submitGrade(0, 1);
